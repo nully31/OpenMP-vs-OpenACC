@@ -1,3 +1,1 @@
-/cuda
-/openacc
-/openmp-cpu
+*.out
