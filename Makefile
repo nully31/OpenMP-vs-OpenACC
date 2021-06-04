@@ -1,10 +1,13 @@
 COMMONFLAGS=-fopenmp -O3
 STDFLAGS=-std=c11
 
-all: openmp-cpu.out openacc.out cuda.out
+all: openmp-cpu.out openmp-gpu.out openacc.out cuda.out
 
 openmp-cpu.out: openmp-cpu.c
 	gcc $< -o $@ $(COMMONFLAGS) $(STDFLAGS)
+
+openmp-gpu.out: openmp-gpu.c
+	~/offload/install/bin/gcc $< -o $@ $(COMMONFLAGS) $(STDFLAGS)
 
 openacc.out: openacc.c
 	pgcc $< -o $@ -acc -Minfo=accel $(COMMONFLAGS) $(STDFLAGS)
@@ -14,6 +17,7 @@ cuda.out: cuda.cu
 
 test: all
 	./openmp-cpu.out
+	./openmp-gpu.out
 	./cuda.out
 	./openacc.out
 
