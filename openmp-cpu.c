@@ -34,7 +34,6 @@ int main(int argc, char const *argv[])
     dtime += omp_get_wtime();
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST * nElem / dtime / 1.0e+9);
 
-    omp_set_num_threads(16);
     dtime = - omp_get_wtime();
     sumArraysOnHostOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
