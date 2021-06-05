@@ -2,6 +2,7 @@
 #include "common.h"
 
 void sumArraysOnACC(float *A, float *B, float *C, const int N) {
+    #pragma acc data copyin(A[0:N]) copyin(B[0:N]) copyout(C[0:N])
     #pragma acc kernels loop independent worker(1024)
     for (int idx = 0; idx < N; idx++) {
         C[idx] = A[idx] + B[idx];
