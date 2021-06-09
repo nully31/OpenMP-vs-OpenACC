@@ -14,7 +14,7 @@ openacc-gcc.out: openacc-gcc.c
 	~/offload/install/bin/gcc $< -o $@ $(GCCFLAGS) $(STDFLAGS)
 
 openacc-pgi.out: openacc-pgi.c
-	pgcc $< -o $@ -acc -Minfo=accel $(COMMONFLAGS) $(STDFLAGS)
+	nvc $< -o $@ -acc -Minfo=accel -gpu=cc86 -tp=host $(COMMONFLAGS) $(STDFLAGS)
 
 cuda.out: cuda.cu
 	nvcc $< -o $@ -arch=sm_86 -Xcompiler $(COMMONFLAGS)
