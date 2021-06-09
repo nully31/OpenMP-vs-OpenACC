@@ -5,7 +5,7 @@ GCCFLAGS=-fopenacc -O3 -g
 all: openmp-cpu.out openmp-gpu.out openacc-gcc.out openacc-pgi.out cuda.out
 
 openmp-cpu.out: openmp-cpu.c
-	gcc $< -o $@ $(COMMONFLAGS) $(STDFLAGS)
+	gcc $< -o $@ -mavx512f $(COMMONFLAGS) $(STDFLAGS)
 
 openmp-gpu.out: openmp-gpu.c
 	~/offload/install/bin/gcc $< -o $@ $(COMMONFLAGS) $(STDFLAGS)
@@ -20,11 +20,11 @@ cuda.out: cuda.cu
 	nvcc $< -o $@ -arch=sm_86 -Xcompiler $(COMMONFLAGS)
 
 test: all
-	./openmp-cpu.out
-	./openmp-gpu.out
-	./cuda.out
-	./openacc-gcc.out
-	./openacc-pgi.out
+	./openmp-cpu.out $(size)
+	./openmp-gpu.out $(size)
+	./cuda.out $(size)
+	./openacc-gcc.out $(size)
+	./openacc-pgi.out $(size)
 
 clean:
 	rm -f *.out

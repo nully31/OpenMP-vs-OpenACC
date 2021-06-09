@@ -2,7 +2,7 @@
 #include "../common.h"
 
 void sumArraysOnHostOMP(float *A, float *B, float *C, const int N) {
-    #pragma omp parallel for
+    #pragma omp parallel for simd
     for (int idx = 0; idx < N; idx++) {
         C[idx] = A[idx] + B[idx];
     }
