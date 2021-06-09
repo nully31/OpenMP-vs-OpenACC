@@ -1,5 +1,5 @@
 #include <omp.h>
-#include "common.h"
+#include "../common.h"
 
 void sumArraysOnHostOMP(float *A, float *B, float *C, const int N) {
     #pragma omp parallel for

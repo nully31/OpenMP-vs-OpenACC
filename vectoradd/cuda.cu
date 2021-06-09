@@ -1,6 +1,6 @@
 #include <cuda_runtime.h>
 #include <omp.h>
-#include "common.h"
+#include "../common.h"
 
 __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N) {
     unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;

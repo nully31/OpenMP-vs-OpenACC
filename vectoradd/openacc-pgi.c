@@ -1,5 +1,5 @@
 #include <omp.h>
-#include "common.h"
+#include "../common.h"
 
 void sumArraysOnACC(float *A, float *B, float *C, const int N) {
     #pragma acc data copyin(A[0:N]) copyin(B[0:N]) copyout(C[0:N])

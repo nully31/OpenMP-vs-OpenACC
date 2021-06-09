@@ -1,5 +1,5 @@
 #include <omp.h>
-#include "common.h"
+#include "../common.h"
 
 void sumArraysOnGPUOMP(float *A, float *B, float *C, const int N) {
     #pragma omp target teams distribute \
