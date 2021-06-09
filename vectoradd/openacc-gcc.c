@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     dtime += omp_get_wtime();
     #pragma acc exit data copyout(D[0:nElem])
     printf("\"sumArraysOnACC\"\n");
-    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST * nElem / dtime / 1.0e+9);
+    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST_VA * nElem / dtime / 1.0e+9);
     checkResult(C, D, nElem);
 
     free(A);

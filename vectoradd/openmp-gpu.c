@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     sumArraysOnGPUOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
     printf("\"sumArraysOnGPUOMP\"\n");
-    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST * nElem / dtime / 1.0e+9);
+    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST_VA * nElem / dtime / 1.0e+9);
     }
     checkResult(C, D, nElem);
 
