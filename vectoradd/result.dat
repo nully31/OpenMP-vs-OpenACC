@@ -1,0 +1,44 @@
+./openmp-cpu.out
+Vector size: 268435456
+
+"sumArraysOnHost"
+Elapsed time: 0.239 sec, 1.122092 GFLOPS
+
+"sumArraysOnHostOMP" with 16 threads
+Elapsed time: 0.104 sec, 2.582826 GFLOPS
+
+Arrays match.
+
+./openmp-gpu.out
+Vector size: 268435456
+
+"sumArraysOnGPUOMP"
+Elapsed time: 0.016 sec, 16.409436 GFLOPS
+
+Arrays match.
+
+./cuda.out
+Device 0: NVIDIA GeForce RTX 3090
+Vector size: 268435456
+
+"sumArraysOnGPU" with <<<grid 262144, block 1024>>>
+Elapsed time: 0.004 sec, 70.597158 GFLOPS
+
+Arrays match.
+
+./openacc-gcc.out
+Vector size: 268435456
+
+"sumArraysOnACC"
+Elapsed time: 0.004 sec, 59.660238 GFLOPS
+
+Arrays match.
+
+./openacc-pgi.out
+Vector size: 268435456
+
+"sumArraysOnACC"
+Elapsed time: 0.004 sec, 69.542922 GFLOPS
+
+Arrays match.
+
