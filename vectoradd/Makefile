@@ -5,7 +5,7 @@ GCCFLAGS=-fopenacc -O3 -g
 all: openmp-cpu.out openmp-gpu.out openacc-gcc.out openacc-pgi.out cuda.out
 
 openmp-cpu.out: openmp-cpu.c
-	gcc $< -o $@ -mavx512f $(COMMONFLAGS) $(STDFLAGS)
+	gcc $< -o $@ -march=native $(COMMONFLAGS) $(STDFLAGS)
 
 openmp-gpu.out: openmp-gpu.c
 	~/offload/install/bin/gcc $< -o $@ $(COMMONFLAGS) $(STDFLAGS)
