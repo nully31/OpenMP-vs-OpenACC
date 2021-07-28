@@ -10,7 +10,7 @@ This contains two simple calculations: vector addition and matrix multiplication
 5. `cuda`: Contains a CUDA version of the code. Compiled with nvcc.
 
 ## Usage
-Use Makefile in each directory. Run `make test` to execute every single version, you can also specify the array size using by `make test size=( a power of 2 )`.
+Use Makefile in each directory. Run `make test` to execute every single version, you can also specify the array size using by `make test size=`*(a power of 2)*.
 
 ## Prerequisites
 * `gcc`: The basic GNU C Compiler.
