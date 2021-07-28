@@ -29,16 +29,16 @@ int main(int argc, char const *argv[])
     sumArraysOnHost(A, B, C, nElem);
 
     // warmup
-    #pragma omp target data map(to:A[0:nElem]) map(to:B[0:nElem]) map(from:D[0:nElem])
-    {
+    #pragma omp target enter data map(to:A[0:nElem]) map(to:B[0:nElem]) map(alloc:D[0:nElem])
     sumArraysOnGPUOMP(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
     sumArraysOnGPUOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
+    #pragma omp target exit data map(from:D[0:nElem])
     printf("\"sumArraysOnGPUOMP\"\n");
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
-    }
+
     checkResult(C, D, nElem);
 
     free(A);
