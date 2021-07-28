@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
     int nxy = nElem * nElem;
     size_t nBytes = nxy * sizeof(float);
 
-    printf("Multrix size: %d x %d\n\n", nElem, nElem);
+    printf("Matrix size: %d x %d\n\n", nElem, nElem);
 
     float *A, *B, *C, *D;
     A = (float *)malloc(nBytes);
