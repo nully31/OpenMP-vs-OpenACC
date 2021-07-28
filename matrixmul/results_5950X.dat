@@ -1,0 +1,44 @@
+./openmp-cpu.out 
+Multrix size: 1024 x 1024
+
+"CBLAS"
+Elapsed time: 0.494 sec, 0.0043 TFLOPS
+
+"mulMatrixOnHostOMP" with 32 threads
+Elapsed time: 0.147 sec, 0.0146 TFLOPS
+
+Arrays match.
+
+./openmp-gpu.out 
+Multrix size: 1024 x 1024
+
+"mulMatrixOnACC"
+Elapsed time: 0.092 sec, 0.0234 TFLOPS
+
+Arrays match.
+
+./cuda.out 
+Device 0: NVIDIA GeForce RTX 3090
+Matrix size: 1024 * 1024
+
+"mulMatrixOnGPU" with <<<grid (32, 32), block (32, 32)>>>
+Elapsed time: 0.001 sec, 2.3304 TFLOPS
+
+Arrays match.
+
+./openacc-gcc.out 
+Multrix size: 1024 x 1024
+
+"mulMatrixOnACC"
+Elapsed time: 0.002 sec, 1.1919 TFLOPS
+
+Arrays match.
+
+./openacc-pgi.out 
+Multrix size: 1024 x 1024
+
+"mulMatrixOnACC"
+Elapsed time: 0.001 sec, 1.6133 TFLOPS
+
+Arrays match.
+
