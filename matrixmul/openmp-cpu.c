@@ -2,12 +2,11 @@
 #include <cblas.h>
 #include "matrixmul.h"
 
-void mulMatrixOnACC(float *A, float *B, float *C, const int N) {
+void mulMatrixOnHostOMP(float *A, float *B, float *C, const int N) {
     #pragma omp parallel for collapse(2)
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             float temp = 0.0;
-            #pragma omp parallel for reduction(+:temp)
             for (int k = 0; k < N; k++) {
                 temp += A[i * N + k] * B[k * N + j];
             }
@@ -41,7 +40,7 @@ int main(int argc, char const *argv[])
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
 
     dtime = - omp_get_wtime();
-    mulMatrixOnACC(A, B, D, nElem);
+    mulMatrixOnHostOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
     printf("\"mulMatrixOnHostOMP\" with %d threads\n", omp_get_max_threads());
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
