@@ -2,15 +2,15 @@
 Matrix size: 1024 x 1024
 
 "CBLAS"
-Elapsed time: 0.471 sec, 0.0046 TFLOPS
+Elapsed time: 0.493 sec, 0.0044 TFLOPS
 
 "mulMatrixOnHost"
-Elapsed time: 0.136 sec, 0.0158 TFLOPS
+Elapsed time: 3.463 sec, 0.0006 TFLOPS
 
 Arrays match.
 
 "mulMatrixOnHostOMP" with 32 threads
-Elapsed time: 0.135 sec, 0.0159 TFLOPS
+Elapsed time: 0.136 sec, 0.0158 TFLOPS
 
 Arrays match.
 
@@ -18,7 +18,7 @@ Arrays match.
 Matrix size: 1024 x 1024
 
 "mulMatrixOnACC"
-Elapsed time: 0.098 sec, 0.0218 TFLOPS
+Elapsed time: 0.101 sec, 0.0213 TFLOPS
 
 Arrays match.
 
@@ -27,7 +27,7 @@ Device 0: NVIDIA GeForce RTX 3090
 Matrix size: 1024 * 1024
 
 "mulMatrixOnGPU" with <<<grid (32, 32), block (32, 32)>>>
-Elapsed time: 0.001 sec, 2.3320 TFLOPS
+Elapsed time: 0.001 sec, 2.3295 TFLOPS
 
 Arrays match.
 
@@ -35,7 +35,7 @@ Arrays match.
 Matrix size: 1024 x 1024
 
 "mulMatrixOnACC"
-Elapsed time: 0.002 sec, 1.1748 TFLOPS
+Elapsed time: 0.002 sec, 1.1972 TFLOPS
 
 Arrays match.
 
@@ -43,7 +43,7 @@ Arrays match.
 Matrix size: 1024 x 1024
 
 "mulMatrixOnACC"
-Elapsed time: 0.001 sec, 1.6194 TFLOPS
+Elapsed time: 0.001 sec, 1.6136 TFLOPS
 
 Arrays match.
 
