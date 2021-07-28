@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
 
     dtime = - omp_get_wtime();
-    mulMatrixOnHostOMP(A, B, D, nElem);
+    mulMatrixOnHost(A, B, D, nElem);
     dtime += omp_get_wtime();
     printf("\"mulMatrixOnHost\"\n");
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
