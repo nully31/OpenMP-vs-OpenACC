@@ -8,7 +8,6 @@ void mulMatrixOnACC(float *A, float *B, float *C, const int N) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             float temp = 0.0;
-            #pragma omp parallel for reduction(+:temp)
             for (int k = 0; k < N; k++) {
                 temp += A[i * N + k] * B[k * N + j];
             }
