@@ -4,8 +4,8 @@ This contains two simple calculations: vector addition and matrix multiplication
 
 ## Files
 1. `openmp-cpu`: Contains sequential and multi-threaded codes by OpenMP. Compiled with basic gcc.
-2. `openmp-gpu`: Contains a GPU offloading code using OpenMP directives (OpenMP 4.5 <). Needs gcc with NVIDIA PTX GPU offloading feature enabled.
-3. `openacc-gcc`: Contains a GPU offloading code using OpenACC directives. Needs gcc with NVIDIA PTX GPU offloading feature enabled.
+2. `openmp-gpu`: Contains a GPU offloading code using OpenMP directives (OpenMP 4.5 <). Compiled with gcc with NVIDIA PTX GPU offloading feature enabled.
+3. `openacc-gcc`: Contains a GPU offloading code using OpenACC directives. Compiled with gcc with NVIDIA PTX GPU offloading feature enabled.
 4. `openacc-pgi`: Contains a GPU offloading code using OpenACC directives. Compiled with NVIDIA PGI Compiler (also known as NVC).
 5. `cuda`: Contains a CUDA version of the code. Compiled with nvcc.
 
