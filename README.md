@@ -14,5 +14,10 @@ Use Makefile in each directory. Run `make test` to execute every single version,
 
 ## Prerequisites
 * `gcc`: The basic GNU C Compiler.
-* `gcc` with NVIDIA PTX: You have to build gcc with this feature enabled in home directory, otherwise change the path in Makefile accordingly. For details, see (https://kristerw.blogspot.com/2017/04/building-gcc-with-support-for-nvidia.html).
-* `PGI Compiler` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see (https://developer.nvidia.com/hpc-sdk).
+* `gcc` with NVIDIA PTX: You have to build gcc with this feature enabled in home directory, otherwise change the path in Makefile accordingly. For details, see https://kristerw.blogspot.com/2017/04/building-gcc-with-support-for-nvidia.html.
+* `PGI Compiler` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see https://developer.nvidia.com/hpc-sdk.
+
+## Misc.
+These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [^1], therefore might cause some issues), but I haven't tried it yet.
+
+[^1] Clacc: OpenACC support for Clang and LLVM. https://www.openacc.org/sites/default/files/inline-images/events/F2F20%20presentations/BoF-clacc.pdf
