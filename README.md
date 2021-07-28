@@ -14,5 +14,5 @@ Use Makefile in each directory. Run `make test` to execute every single version,
 
 ## Prerequisites
 * `gcc`: The basic GNU C Compiler.
-*` gcc` with NVIDIA PTX: You have to build gcc with this feature enabled in home directory, otherwise change the path in Makefile accordingly. For details, see (https://kristerw.blogspot.com/2017/04/building-gcc-with-support-for-nvidia.html).
+* `gcc` with NVIDIA PTX: You have to build gcc with this feature enabled in home directory, otherwise change the path in Makefile accordingly. For details, see (https://kristerw.blogspot.com/2017/04/building-gcc-with-support-for-nvidia.html).
 * `PGI Compiler` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see (https://developer.nvidia.com/hpc-sdk).
