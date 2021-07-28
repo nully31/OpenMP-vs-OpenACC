@@ -18,6 +18,6 @@ Use Makefile in each directory. Run `make test` to execute every single version,
 * `PGI Compiler` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see https://developer.nvidia.com/hpc-sdk.
 
 ## Misc.
-These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [^1], therefore might cause some issues), but I haven't tried it yet.
+These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [1], therefore might cause some issues), but I haven't tried it yet.
 
-[^1]: Clacc: OpenACC support for Clang and LLVM. https://www.openacc.org/sites/default/files/inline-images/events/F2F20%20presentations/BoF-clacc.pdf
+[1] Clacc: OpenACC support for Clang and LLVM. https://www.openacc.org/sites/default/files/inline-images/events/F2F20%20presentations/BoF-clacc.pdf
