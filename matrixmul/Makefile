@@ -30,11 +30,11 @@ link.o: cuda.o
 	nvcc $< -o $@ -arch=sm_86 -dlink
 
 test: all
-	./openmp-cpu.out
-	./openmp-gpu.out
-	./cuda.out
-	./openacc-gcc.out
-	./openacc-pgi.out
+	./openmp-cpu.out $(size)
+	./openmp-gpu.out $(size)
+	./cuda.out $(size)
+	./openacc-gcc.out $(size)
+	./openacc-pgi.out $(size)
 
 clean:
 	rm -f *.out *.o
