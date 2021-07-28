@@ -1,5 +1,5 @@
 #include <omp.h>
-#include "../common.h"
+#include "vectoradd.h"
 
 void sumArraysOnACC(float *A, float *B, float *C, const int N) {
     #pragma acc data copyin(A[0:N]) copyin(B[0:N]) copyout(C[0:N])
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     dtime += omp_get_wtime();
     #pragma acc exit data copyout(D[0:nElem])
     printf("\"sumArraysOnACC\"\n");
-    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST_VA * nElem / dtime / 1.0e+9);
+    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
     checkResult(C, D, nElem);
 
     free(A);

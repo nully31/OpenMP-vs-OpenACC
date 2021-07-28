@@ -6,12 +6,6 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
-#define COST_VA 1
-#define COST_MM (2 * nElem)
-
-#define BLOCKSIZE 64
-#define UNROLL 16
-
 #define CHECK(call)                                                         \
 {                                                                           \
     const cudaError_t error = call;                                         \
@@ -56,27 +50,8 @@ void sumArraysOnHost(float *A, float *B, float *C, const int N) {
     }
 }
 
-static void do_block(float *A, float *B, float *C, const int n,
-			const int si, const int sj, const int sk) {
-    #pragma omp parallel for collapse(2)
-	for (int i = si; i < si + BLOCKSIZE; i++) {
-		for (int j = sk; j < sk + BLOCKSIZE; j++) {
-			float cij = C[i*n+j]; /* cij = C[i][j] */
-			for (int k = sj; k < sj + BLOCKSIZE; k++)
-				cij += A[i*n+k] * B[k*n+j]; /* cij = A[i][k] * B[k][j] */
-			C[i*n+j] = cij; /* C[i][j] = cij */
-		}
-	}
-}
-
-void mulMatrixOnHost(float *A, float *B, float *C, const int n) {
-    #pragma omp parallel for collapse(3)
-	for (int si = 0; si < n; si += BLOCKSIZE) {
-		for (int sj = 0; sj < n; sj += BLOCKSIZE) {
-			for (int sk = 0; sk < n; sk += BLOCKSIZE) {
-				do_block(A, B, C, n, si, sj, sk);
-			}
-		}
-	}
+double calcVaddGFLOPS(int nElem, double dtime) {
+    double cost = 1.0;
+    return cost * nElem / dtime / 1.0e+9;
 }
 #endif

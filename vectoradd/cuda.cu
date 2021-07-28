@@ -1,6 +1,6 @@
 #include <cuda_runtime.h>
 #include <omp.h>
-#include "../common.h"
+#include "vectoradd.h"
 
 __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N) {
     unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
     CHECK(cudaDeviceSynchronize());
     dtime += omp_get_wtime();
     printf("\"sumArraysOnGPU\" with <<<grid %d, block %d>>>\n", grid.x, block.x);
-    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, COST_VA * nElem / dtime / 1.0e+9);
+    printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
 
     CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));
     checkResult(hostRef, gpuRef, nElem);
