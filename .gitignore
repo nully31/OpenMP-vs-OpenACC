@@ -1,5 +1,4 @@
 *.out
 report*
 *.o
-/matrixmul/*
 /.vscode
