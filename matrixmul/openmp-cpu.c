@@ -51,12 +51,14 @@ int main(int argc, char const *argv[])
     printf("\"CBLAS\"\n");
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
 
-    dtime = - omp_get_wtime();
-    mulMatrixOnHost(A, B, D, nElem);
-    dtime += omp_get_wtime();
-    printf("\"mulMatrixOnHost\"\n");
-    printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
-    checkResult(C, D, nxy);
+    if (nElem < 1 << 11) {
+        dtime = - omp_get_wtime();
+        mulMatrixOnHost(A, B, D, nElem);
+        dtime += omp_get_wtime();
+        printf("\"mulMatrixOnHost\"\n");
+        printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
+        checkResult(C, D, nxy);
+    }
 
     dtime = - omp_get_wtime();
     mulMatrixOnHostOMP(A, B, D, nElem);
