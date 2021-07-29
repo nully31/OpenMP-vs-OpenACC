@@ -16,17 +16,7 @@ This contains two simple calculations: vector addition and matrix multiplication
 5. `cuda`: Contains a CUDA version of the code. Compiled with nvcc.
 
 ## Usage
-<<<<<<< HEAD
-Use Makefile in each directory. Run `make run` to execute every single version, you can also specify the array size using by `make run size=`*(a power of 2)*.
-
-## Prerequisites
-* `gcc`: The basic GNU C Compiler.
-* `gcc` with NVIDIA PTX: You have to build gcc with this feature enabled in home directory, otherwise change the path in Makefile accordingly. For details, see https://kristerw.blogspot.com/2017/04/building-gcc-with-support-for-nvidia.html.
-* `PGI Compiler` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see https://developer.nvidia.com/hpc-sdk.
-* `BLAS` and `CBLAS` libraries: It is used for SGEMM validation. For details, see http://www.netlib.org/blas/.
-=======
-Use Makefile in each directory. Run `make test` to execute every single version, you can also specify the array size using <code>make test size=*(a power of 2)*</code>.
->>>>>>> 62e257d40171e0dedcf7a86ad09137269cb6bee5
+Use Makefile in each directory. Run `make run` to execute every single version, you can also specify the array size using <code>make run size=*(a power of 2)*</code>.
 
 ## Misc.
 These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [1], therefore might cause some issues), but I haven't tried it yet.
