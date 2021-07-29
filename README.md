@@ -13,7 +13,7 @@ This contains two simple calculations: vector addition and matrix multiplication
 2. `openmp-gpu`: Contains a GPU offloading code using OpenMP directives (OpenMP 4.5 <). Compiled with gcc with NVIDIA PTX GPU offloading feature enabled.
 3. `openacc-gcc`: Contains a GPU offloading code using OpenACC directives. Compiled with gcc with NVIDIA PTX GPU offloading feature enabled.
 4. `openacc-pgi`: Contains a GPU offloading code using OpenACC directives. Compiled with NVIDIA PGI Compiler (also known as NVC).
-5. `cuda`: Contains a CUDA version of the code. Compiled with nvcc.
+5. `cuda`: Contains a CUDA version of the code and also the `cublasSgemm` routine. Compiled with nvcc and linked to the CBLAS wrapper using gcc.
 
 ## Usage
 Use Makefile in each directory. Run `make run` to execute every single version, you can also specify the array size using <code>make run size=*(a power of 2)*</code>.
