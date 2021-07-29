@@ -1,6 +1,7 @@
 #include <cuda_runtime.h>
 #include <omp.h>
 #include "matrixmul.h"
+#include "cublas_v2.h"
 
 __global__ void mulMatrixOnGPU(float *A, float *B, float *C, const int N) {
     unsigned int ix = threadIdx.x + blockIdx.x * blockDim.x;
@@ -73,6 +74,29 @@ int main(int argc, char **argv) {
     CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));
     checkResult(hostRef, gpuRef, nxy);
 
+    // cuBLAS
+    cublasStatus_t stat;
+    cublasHandle_t handle;
+
+    stat = cublasCreate(&handle);
+    stat = cublasSetMatrix(nElem, nElem, sizeof(*h_A), h_A, nElem, d_A, nElem);
+    stat = cublasSetMatrix(nElem, nElem, sizeof(*h_B), h_B, nElem, d_B, nElem);
+    CHECK(cudaMemset(d_A, 0, nBytes));
+
+    float alpha = 1.0f;
+    float beta = 1.0f;
+
+    dtime = - omp_get_wtime();
+    stat = cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, nElem, nElem, nElem, &alpha, d_A, nElem, d_B, nElem, &beta, d_C, nElem);
+    CHECK(cudaDeviceSynchronize());
+    dtime += omp_get_wtime();
+    printf("\"cublasSgemm\"\n");
+    printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
+
+    stat = cublasGetMatrix(nElem, nElem, sizeof(*gpuRef), d_C, nElem, gpuRef, nElem);
+    checkResult(hostRef, gpuRef, nxy);
+
+
     free(h_A);
     free(h_B);
     free(hostRef);
@@ -81,6 +105,8 @@ int main(int argc, char **argv) {
     CHECK(cudaFree(d_A));
     CHECK(cudaFree(d_B));
     CHECK(cudaFree(d_C));
+
+    cublasDestroy(handle);
 
     CHECK(cudaDeviceReset());
 
