@@ -19,6 +19,7 @@ This contains two simple calculations: vector addition and matrix multiplication
 Use Makefile in each directory. Run `make run` to execute every single version, you can also specify the array size using <code>make run size=*(a power of 2)*</code>.
 
 ## Misc.
-These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [1], therefore might cause some issues), but I haven't tried it yet.
+* `openacc-pgi` seems to incur a relatively large error compared to others. I'm not certain about the reason, but maybe it could be the gang / worker settings which is automatically set by the compiler.
+* These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [1], therefore might cause some issues), but I haven't tried it yet.
 
 [1] Clacc: OpenACC support for Clang and LLVM. https://www.openacc.org/sites/default/files/inline-images/events/F2F20%20presentations/BoF-clacc.pdf
