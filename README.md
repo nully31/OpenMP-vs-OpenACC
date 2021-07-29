@@ -5,8 +5,8 @@ This contains two simple calculations: vector addition and matrix multiplication
 ## Prerequisites
 * `gcc`: The basic GNU C Compiler.
 * `gcc` with NVIDIA PTX: You have to build gcc with this feature enabled in home directory, otherwise change the path in Makefile accordingly. For details, see https://kristerw.blogspot.com/2017/04/building-gcc-with-support-for-nvidia.html.
-* `PGI Compiler` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see https://developer.nvidia.com/hpc-sdk.
-* `BLAS` and `CBLAS` libraries: It is used for SGEMM validation. For details, see http://www.netlib.org/blas/.
+* `pgcc (nvc)` and `nvcc`: These come with NVIDIA HPC Software Development Kit. For details, see https://developer.nvidia.com/hpc-sdk.
+* BLAS and CBLAS libraries: It is used for SGEMM validation. For details, see http://www.netlib.org/blas/.
 
 ## Files
 1. `openmp-cpu`: Contains sequential and multi-threaded codes by OpenMP. Compiled with basic gcc.
