@@ -20,6 +20,6 @@ Use Makefile in each directory. Run `make run` to execute every single version, 
 
 ## Misc.
 * `openacc-pgi` seems to incur a relatively large error compared to others. I'm not certain about the reason, but maybe it could be the gang / worker settings which is automatically set by the compiler.
-* These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [1], therefore might cause some issues), but I haven't tried it yet.
+* These OpenMP and OpenACC offloading codes should work on the LLVM/Clang compiler (Although the OpenACC implementation is still in progress and it's translated to OpenMP directives internally [1], therefore might cause some issues), but I haven't tried it yet. Also you may have to build it to use the GPU offloading feature, just like gcc. 
 
 [1] Clacc: OpenACC support for Clang and LLVM. https://www.openacc.org/sites/default/files/inline-images/events/F2F20%20presentations/BoF-clacc.pdf
