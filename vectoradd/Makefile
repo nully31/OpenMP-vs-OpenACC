@@ -19,7 +19,7 @@ openacc-pgi.out: openacc-pgi.c
 cuda.out: cuda.cu
 	nvcc $< -o $@ -arch=sm_86 -Xcompiler $(COMMONFLAGS)
 
-test: all
+run: all
 	./openmp-cpu.out $(size)
 	./openmp-gpu.out $(size)
 	./cuda.out $(size)
@@ -29,4 +29,4 @@ test: all
 clean:
 	rm -f *.out
 
-.PHONY: all test clean
+.PHONY: all run clean

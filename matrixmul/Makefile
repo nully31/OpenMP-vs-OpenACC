@@ -29,7 +29,7 @@ cuda.o: cuda.cu matrixmul.h
 link.o: cuda.o
 	nvcc $< -o $@ -arch=sm_86 -dlink
 
-test: all
+run: all
 	./openmp-cpu.out $(size)
 	./openmp-gpu.out $(size)
 	./cuda.out $(size)
@@ -39,4 +39,4 @@ test: all
 clean:
 	rm -f *.out *.o
 
-.PHONY: all test clean
+.PHONY: all run clean
