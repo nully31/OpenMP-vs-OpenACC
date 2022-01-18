@@ -3,7 +3,7 @@ STDFLAGS=-std=c11
 GCCFLAGS=-fopenacc -O3 -g
 BLAS=-lblas -lcblas
 
-all: openmp-cpu.o openmp-gpu-gcc.o openmp-gpu-nvc.o openacc-gcc.o openacc-nvc.o cudao.o
+all: openmp-cpu.o openmp-gpu-gcc.o openmp-gpu-clang.o openmp-gpu-nvc.o openacc-gcc.o openacc-nvc.o cudao.o
 
 openmp-cpu.o: openmp-cpu.c
 	gcc $< -o $@ -march=native -fopenmp -O2 -g -lm -lblas -lcblas
