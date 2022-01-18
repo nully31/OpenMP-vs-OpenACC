@@ -34,19 +34,30 @@ int main(int argc, char const *argv[])
     initialData(A, nxy);
     initialData(B, nxy);
 
-    cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, nElem, nElem, nElem, 1.0, A, nElem, B, nElem, 1.0, C, nElem);
+    //cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, nElem, nElem, nElem, 1.0, A, nElem, B, nElem, 1.0, C, nElem);
 
     // warmup
     #pragma omp target enter data map(to:A[0:nxy]) map(to:B[0:nxy]) map(alloc:D[0:nxy])
-    mulMatrixOnACC(A, B, D, nElem);
+    // mulMatrixOnACC(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
-    mulMatrixOnACC(A, B, D, nElem);
+    // mulMatrixOnACC(A, B, D, nElem);
+    #pragma omp target teams distribute \
+            parallel for collapse(2)
+    for (int i = 0; i < nElem; i++) {
+        for (int j = 0; j < nElem; j++) {
+            float temp = 0.0;
+            for (int k = 0; k < nElem; k++) {
+                temp += A[i * nElem + k] * B[k * nElem + j];
+            }
+            D[i * nElem + j] = temp;
+        }
+    }
     dtime += omp_get_wtime();
     #pragma omp target exit data map(from:D[0:nxy])
     printf("\"mulMatrixOnACC\"\n");
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
-    checkResult(C, D, nxy);
+    //checkResult(C, D, nxy);
 
     free(A);
     free(B);
