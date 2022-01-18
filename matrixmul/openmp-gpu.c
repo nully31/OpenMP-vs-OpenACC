@@ -57,6 +57,7 @@ int main(int argc, char const *argv[])
     #pragma omp target exit data map(from:D[0:nxy])
     printf("\"mulMatrixOnACC\"\n");
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
+    printf("%f %f %f\n", D[0], D[(nElem / 2 * nElem) + (nElem / 2)], D[0]);
     //checkResult(C, D, nxy);
 
     free(A);
