@@ -42,11 +42,23 @@ int main(int argc, char const *argv[])
     mulMatrixOnACC(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
-    mulMatrixOnACC(A, B, D, nElem);
+    #pragma acc data present(A[0:nxy], B[0:nxy], D[0:nxy])
+    #pragma acc kernels loop independent collapse(2)
+    for (int i = 0; i < nElem; i++) {
+        for (int j = 0; j < nElem; j++) {
+            float temp = 0.0;
+            // #pragma acc loop seq
+            for (int k = 0; k < nElem; k++) {
+                temp += A[i * nElem + k] * B[k * nElem + j];
+            }
+            D[i * nElem + j] = temp;
+        }
+    }
     dtime += omp_get_wtime();
     #pragma acc exit data copyout(D[0:nxy])
     printf("\"mulMatrixOnACC\"\n");
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
+    printf("%f %f %f\n", D[0], D[(nElem / 2 * nElem) + (nElem / 2)], D[0]);
     //checkResult(C, D, nxy);
 
     free(A);
