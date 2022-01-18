@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 
 #ifndef _COMMON_H_
 #define _COMMON_H_
@@ -21,7 +22,7 @@ void checkResult(float *hostRef, float *gpuRef, const int N) {
     double epsilon = 1.0e-8;
     bool match = 1;
     for (int i = 0; i < N; i++) {
-        if (abs(hostRef[i] - gpuRef[i]) > epsilon) {
+        if (fabs(hostRef[i] - gpuRef[i]) > epsilon) {
             match = 0;
             printf("Arrays do not match!\n");
             printf("host %5.2f\tgpu %5.2f at current %d\n", hostRef[i], gpuRef[i], i);
@@ -51,7 +52,7 @@ void sumArraysOnHost(float *A, float *B, float *C, const int N) {
 }
 
 double calcVaddGFLOPS(int nElem, double dtime) {
-    double cost = 1.0;
+    double cost = 1.0 * 1000;
     return cost * nElem / dtime / 1.0e+9;
 }
 #endif

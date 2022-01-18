@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     sumArraysOnACC(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
-    sumArraysOnACC(A, B, D, nElem);
+    for (int i = 0; i < 1000; i++) sumArraysOnACC(A, B, D, nElem);
     dtime += omp_get_wtime();
     #pragma acc exit data copyout(D[0:nElem])
     printf("\"sumArraysOnACC\"\n");

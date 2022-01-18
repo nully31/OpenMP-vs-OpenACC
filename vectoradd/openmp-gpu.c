@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     sumArraysOnGPUOMP(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
-    sumArraysOnGPUOMP(A, B, D, nElem);
+    for (int i = 0; i < 1000; i++) sumArraysOnGPUOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
     #pragma omp target exit data map(from:D[0:nElem])
     printf("\"sumArraysOnGPUOMP\"\n");

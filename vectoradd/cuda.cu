@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
     CHECK(cudaDeviceSynchronize());
 
     double dtime = - omp_get_wtime();
-    sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
+    for (int i = 0; i < 1000; i++) sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
     CHECK(cudaDeviceSynchronize());
     dtime += omp_get_wtime();
     printf("\"sumArraysOnGPU\" with <<<grid %d, block %d>>>\n", grid.x, block.x);

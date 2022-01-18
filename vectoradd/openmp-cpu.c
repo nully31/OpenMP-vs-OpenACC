@@ -30,12 +30,12 @@ int main(int argc, char const *argv[])
 
     printf("\"sumArraysOnHost\"\n");
     double dtime = - omp_get_wtime();
-    sumArraysOnHost(A, B, C, nElem);
+    for (int i = 0; i < 1000; i++) sumArraysOnHost(A, B, C, nElem);
     dtime += omp_get_wtime();
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
 
     dtime = - omp_get_wtime();
-    sumArraysOnHostOMP(A, B, D, nElem);
+    for (int i = 0; i < 1000; i++) sumArraysOnHostOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
     printf("\"sumArraysOnHostOMP\" with %d threads\n", omp_get_max_threads());
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
