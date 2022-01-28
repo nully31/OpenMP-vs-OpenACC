@@ -1,6 +1,9 @@
 /*
  * clang 14.0 crashes on compile when any optimization options (except `-O0`) are involved for some reason.
  * Use `make openmp-gpu-clang-opt` for optimized binary.
+ *
+ * Also, for some reason when cblas library is excuted on nvc binary, my PC crashes.
+ * Thus `cblas_sgemm()` is disabled when compiled with nvc.
  */
 
 #include <omp.h>
@@ -50,7 +53,9 @@ int main(int argc, char const *argv[])
     initialData(A, nxy);
     initialData(B, nxy);
 
+#ifndef __NVCOMPILER
     cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, nElem, nElem, nElem, 1.0, A, nElem, B, nElem, 1.0, C, nElem);
+#endif
 
     #pragma omp target enter data map(to:A[0:nxy]) map(to:B[0:nxy]) map(alloc:D[0:nxy])
 
@@ -60,7 +65,9 @@ int main(int argc, char const *argv[])
     dtime += omp_get_wtime();
     #pragma omp target exit data map(from:D[0:nxy])
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
+#ifndef __NVCOMIPLER
     checkResult(C, D, nxy);
+#endif
 
     free(A);
     free(B);
