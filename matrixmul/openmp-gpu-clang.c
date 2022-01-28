@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
 
     #pragma omp target enter data map(to:A[0:nxy]) map(to:B[0:nxy]) map(alloc:D[0:nxy])
 
-    printf("\033[1mMatrix Multiplication on GPU using OpenMP&%s with -O3 flag\033[0m\n", compiler);
+    printf("\033[1mMatrix Multiplication on GPU using OpenMP&%s with optimization flag\033[0m\n", compiler);
     double dtime = - omp_get_wtime();
     #pragma omp target teams distribute \
             parallel for collapse(2)
