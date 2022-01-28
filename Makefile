@@ -29,7 +29,9 @@ MMUL:
 run: VADD_run MMUL_run
 
 VADD_run:
+ifndef VECTOR_SIZE
 	$(info You may specify size of vectors by `VECTOR_SIZE=` argument)
+endif
 	$(VADD_BIN_DIR)/openmp-cpu $(VECTOR_SIZE)
 	$(VADD_BIN_DIR)/openmp-gpu-gcc $(VECTOR_SIZE)
 	$(VADD_BIN_DIR)/openmp-gpu-clang $(VECTOR_SIZE)
@@ -39,7 +41,9 @@ VADD_run:
 	$(VADD_BIN_DIR)/cuda $(VECTOR_SIZE)
 
 MMUL_run:
+ifndef MATRIX_SIZE
 	$(info You may specify size of matrices by `MATRIX_SIZE=` argument)
+endif
 	$(MMUL_BIN_DIR)/openmp-cpu $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/openmp-gpu-gcc $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/openmp-gpu-nvc $(MATRIX_SIZE)
