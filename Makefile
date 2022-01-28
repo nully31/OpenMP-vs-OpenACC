@@ -20,6 +20,7 @@ MMUL:
 	mv openmp-cpu $(MMUL_BIN_DIR);\
 	mv openmp-gpu-gcc $(MMUL_BIN_DIR);\
 	mv openmp-gpu-clang $(MMUL_BIN_DIR);\
+	mv openmp-gpu-clang-opt $(MMUL_BIN_DIR);\
 	mv openmp-gpu-nvc $(MMUL_BIN_DIR);\
 	mv openacc-gcc $(MMUL_BIN_DIR);\
 	mv openacc-nvc $(MMUL_BIN_DIR);\
@@ -43,6 +44,7 @@ MMUL_run:
 	$(MMUL_BIN_DIR)/openmp-gpu-gcc $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/openmp-gpu-nvc $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/openmp-gpu-clang $(MATRIX_SIZE)
+	$(MMUL_BIN_DIR)/openmp-gpu-clang-opt $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/openacc-gcc $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/openacc-nvc $(MATRIX_SIZE)
 	$(MMUL_BIN_DIR)/cuda $(MATRIX_SIZE)
