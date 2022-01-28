@@ -17,5 +17,5 @@ As of now, this repository contains two simple calculations: vector addition and
 
 ## Usage
 Use Makefile in the root directory (`OpenMP-vs-OpenACC/Makefile`). `make run` can be used to run all the binaries.
-You may specify the size of vectors for vector addition or matrices for matrix multiplication by using `VECTOR_SIZE=` or `MATRIX_SIZE=` command line arguments.
+You may specify the size of vectors for vector addition or matrices for matrix multiplication by using `VECTOR_SIZE=` or `MATRIX_SIZE=` command line arguments along with `make run` command.
 Both numbers should be the exponent of 2.
