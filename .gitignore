@@ -2,3 +2,5 @@
 report*
 *.o
 /.vscode
+bin/matrixmul/*
+bin/vectoradd/*
