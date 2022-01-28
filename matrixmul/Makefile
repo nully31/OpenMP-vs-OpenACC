@@ -40,9 +40,10 @@ run: all
 	./openmp-cpu.o $(size)
 	./openmp-gpu-gcc.o $(size)
 	./openmp-gpu-nvc.o $(size)
-	./cudao.o $(size)
+	./openmp-gpu-clang.o $(size)
 	./openacc-gcc.o $(size)
 	./openacc-nvc.o $(size)
+	./cudao.o $(size)
 
 clean:
 	rm -f *.o *.out
