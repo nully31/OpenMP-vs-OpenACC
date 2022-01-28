@@ -34,9 +34,6 @@ int main(int argc, char const *argv[])
     initialData(A, nElem);
     initialData(B, nElem);
 
-    // warmup
-    //sumArraysOnHost(A, B, C, nElem);
-
     printf("\033[1mVector Addition on CPU (Sequential) using %s\033[0m\n", compiler);
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnHost(A, B, C, nElem);
