@@ -53,22 +53,18 @@ int main(int argc, char **argv) {
     CHECK(cudaMemcpy(d_A, h_A, nBytes, cudaMemcpyHostToDevice));
     CHECK(cudaMemcpy(d_B, h_B, nBytes, cudaMemcpyHostToDevice));
 
-    dim3 block(32, 32);
+    dim3 block(128, 4);
     if (argc > 3) {
         block.x = atoi(argv[2]);
         block.y = atoi(argv[3]);
     }
     dim3 grid((nElem + block.x - 1) / block.x, (nElem + block.y - 1) / block.y);
 
-    // warmup
-    mulMatrixOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
-    CHECK(cudaDeviceSynchronize());
-
+    printf("\033[01mMatrix Multiplication on GPU with <<<grid (%d, %d), block (%d, %d)>>> using CUDA\033[0m\n", grid.x, grid.y, block.x, block.y);
     double dtime = - omp_get_wtime();
     mulMatrixOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
-    CHECK(cudaDeviceSynchronize());
+    CHECK(cudaDeviceSynchronize())
     dtime += omp_get_wtime();
-    printf("\"mulMatrixOnGPU\" with <<<grid (%d, %d), block (%d, %d)>>>\n", grid.x, grid.y, block.x, block.y);
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
 
     CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));
@@ -86,11 +82,11 @@ int main(int argc, char **argv) {
     float alpha = 1.0f;
     float beta = 1.0f;
 
+    printf("\033[01mMatrix Multiplication on GPU using cublasSgemm\033[0m\n");
     dtime = - omp_get_wtime();
     stat = cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, nElem, nElem, nElem, &alpha, d_A, nElem, d_B, nElem, &beta, d_C, nElem);
     CHECK(cudaDeviceSynchronize());
     dtime += omp_get_wtime();
-    printf("\"cublasSgemm\"\n");
     printf("Elapsed time: %.3f sec, %.4f TFLOPS\n\n", dtime, calcMmulTFLOPS(nElem, dtime));
 
     stat = cublasGetMatrix(nElem, nElem, sizeof(*gpuRef), d_C, nElem, gpuRef, nElem);

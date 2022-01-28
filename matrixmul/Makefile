@@ -7,7 +7,7 @@ openmp-gpu-gcc: openmp-gpu.c
 	gcc $< -o $@ -fopenmp -foffload=nvptx-none -O2 -lblas -lcblas
 
 openmp-gpu-clang: openmp-gpu.c
-	clang $< -o $@ -fopenmp -fopenmp-targets=nvptx64 -Xopenmp-target -march=sm_86 -O2 -g -lm
+	clang $< -o $@ -fopenmp -fopenmp-targets=nvptx64 -Xopenmp-target -march=sm_86 -g -lm -lblas -lcblas
 
 openmp-gpu-nvc: openmp-gpu.c
 	nvc $< -o $@ -mp=gpu -Minfo=accel -gpu=cc86 -tp=host -g -lm -fast -lblas -lcblas
@@ -16,7 +16,7 @@ openacc-gcc: openacc-gcc.c
 	gcc $< -o $@ -fopenacc -O2 -g -lm -lblas -lcblas
 
 openacc-nvc: openacc-nvc.c
-	nvc $< -o $@ -acc -Minfo=accel -gpu=cc86 -tp=host -g -lm -fast
+	nvc $< -o $@ -acc -Minfo=accel -gpu=cc86 -tp=host -g -lm -fast -lblas -lcblas
 
 cuda: cuda.o link.o cblaswrapper.o
 	gcc cuda.o link.o cblaswrapper.o -o $@ -lblas -lcblas -fopenmp -O2 -g -L/usr/local/cuda-11.5/lib64 -lcudart -lcublas

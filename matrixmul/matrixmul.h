@@ -19,7 +19,7 @@
 }                                                                           \
 
 void checkResult(float *hostRef, float *gpuRef, const int N) {
-    double epsilon = 1.0e-1;
+    double epsilon = 1.0;
     bool match = 1;
     for (int i = 0; i < N; i++) {
         if (fabs(hostRef[i] - gpuRef[i]) > epsilon) {
