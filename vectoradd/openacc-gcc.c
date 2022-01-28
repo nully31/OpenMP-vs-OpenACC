@@ -12,6 +12,15 @@ void sumArraysOnACC(float *A, float *B, float *C, const int N) {
 
 int main(int argc, char const *argv[])
 {
+    char* compiler =
+#ifdef __NVCOMPILER
+    "nvc";
+#elif __clang__
+    "clang";
+#elif __GNUC__
+    "gcc";
+#endif
+
     int nElem = 1 << 28;
     if (argc > 1) nElem = 1 << atoi(argv[1]);
     size_t nBytes = nElem * sizeof(float);
@@ -33,11 +42,11 @@ int main(int argc, char const *argv[])
     #pragma acc enter data copyin(A[0:nElem]) copyin(B[0:nElem]) create(D[0:nElem])
     //sumArraysOnACC(A, B, D, nElem);
 
+    printf("\033[1mVector Addition on GPU using OpenACC&%s\033[0m\n", compiler);
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnACC(A, B, D, nElem);
     dtime += omp_get_wtime();
     #pragma acc exit data copyout(D[0:nElem])
-    printf("\"sumArraysOnACC\"\n");
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
     checkResult(C, D, nElem);
 

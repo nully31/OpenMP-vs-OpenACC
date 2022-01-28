@@ -49,11 +49,11 @@ int main(int argc, char **argv) {
     // sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
     // CHECK(cudaDeviceSynchronize());
 
+    printf("\033[1mVector Addition on GPU with <<<grid %d, block %d>>> using CUDA\033[0m\n", grid.x, block.x);
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
     CHECK(cudaDeviceSynchronize());
     dtime += omp_get_wtime();
-    printf("\"sumArraysOnGPU\" with <<<grid %d, block %d>>>\n", grid.x, block.x);
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
 
     CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));

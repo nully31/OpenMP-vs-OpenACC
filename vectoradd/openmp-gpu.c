@@ -11,6 +11,15 @@ void sumArraysOnGPUOMP(float *A, float *B, float *C, const int N) {
 
 int main(int argc, char const *argv[])
 {
+    char* compiler =
+#ifdef __NVCOMPILER
+    "nvc";
+#elif __clang__
+    "clang";
+#elif __GNUC__
+    "gcc";
+#endif
+
     int nElem = 1 << 28;
     if (argc > 1) nElem = 1 << atoi(argv[1]);
     size_t nBytes = nElem * sizeof(float);
@@ -32,11 +41,11 @@ int main(int argc, char const *argv[])
     #pragma omp target enter data map(to:A[0:nElem]) map(to:B[0:nElem]) map(alloc:D[0:nElem])
     //sumArraysOnGPUOMP(A, B, D, nElem);
 
+    printf("\033[1mVector Addition on GPU using OpenMP&%s\033[0m\n", compiler);
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnGPUOMP(A, B, D, nElem);
     dtime += omp_get_wtime();
     #pragma omp target exit data map(from:D[0:nElem])
-    printf("\"sumArraysOnGPUOMP\"\n");
     printf("Elapsed time: %.3f sec, %lf GFLOPS\n\n", dtime, calcVaddGFLOPS(nElem, dtime));
 
     checkResult(C, D, nElem);
