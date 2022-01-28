@@ -4,3 +4,4 @@ report*
 /.vscode
 bin/matrixmul/*
 bin/vectoradd/*
+Results.ods
