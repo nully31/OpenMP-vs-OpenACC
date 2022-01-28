@@ -30,9 +30,9 @@ run: all
 	./openmp-gpu-gcc.o $(size)
 	./openmp-gpu-clang.o $(size)
 	./openmp-gpu-nvc.o $(size)
-	./cuda.o $(size)
 	./openacc-gcc.o $(size)
 	./openacc-nvc.o $(size)
+	./cuda.o $(size)
 
 clean:
 	rm -f *.o
