@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 
     // warmup
     #pragma acc enter data copyin(A[0:nElem]) copyin(B[0:nElem]) create(D[0:nElem])
-    sumArraysOnACC(A, B, D, nElem);
+    //sumArraysOnACC(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnACC(A, B, D, nElem);

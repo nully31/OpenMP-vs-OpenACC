@@ -3,7 +3,7 @@
 
 void sumArraysOnGPUOMP(float *A, float *B, float *C, const int N) {
     #pragma omp target teams distribute \
-                parallel for
+                parallel for num_threads(128)
     for (int idx = 0; idx < N; idx++) {
         C[idx] = A[idx] + B[idx];
     }
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 
     // warmup
     #pragma omp target enter data map(to:A[0:nElem]) map(to:B[0:nElem]) map(alloc:D[0:nElem])
-    sumArraysOnGPUOMP(A, B, D, nElem);
+    //sumArraysOnGPUOMP(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnGPUOMP(A, B, D, nElem);

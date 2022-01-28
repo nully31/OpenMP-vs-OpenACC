@@ -4,6 +4,7 @@
 void sumArraysOnACC(float *A, float *B, float *C, const int N) {
     #pragma acc data copyin(A[0:N]) copyin(B[0:N]) copyout(C[0:N])
     #pragma acc parallel loop independent
+    #pragma acc num_vector(128)
     for (int idx = 0; idx < N; idx++) {
         C[idx] = A[idx] + B[idx];
     }
@@ -30,7 +31,7 @@ int main(int argc, char const *argv[])
 
     // warmup
     #pragma acc enter data copyin(A[0:nElem]) copyin(B[0:nElem]) create(D[0:nElem])
-    sumArraysOnACC(A, B, D, nElem);
+    //sumArraysOnACC(A, B, D, nElem);
 
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnACC(A, B, D, nElem);

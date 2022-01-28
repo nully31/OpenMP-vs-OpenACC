@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
     initialData(B, nElem);
 
     // warmup
-    sumArraysOnHost(A, B, C, nElem);
+    //sumArraysOnHost(A, B, C, nElem);
 
     printf("\"sumArraysOnHost\"\n");
     double dtime = - omp_get_wtime();

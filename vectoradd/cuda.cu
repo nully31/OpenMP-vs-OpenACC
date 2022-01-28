@@ -42,12 +42,12 @@ int main(int argc, char **argv) {
     CHECK(cudaMemcpy(d_A, h_A, nBytes, cudaMemcpyHostToDevice));
     CHECK(cudaMemcpy(d_B, h_B, nBytes, cudaMemcpyHostToDevice));
 
-    dim3 block(1024);
+    dim3 block(128);
     dim3 grid((nElem + block.x - 1) / block.x);
 
     // warmup
-    sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
-    CHECK(cudaDeviceSynchronize());
+    // sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
+    // CHECK(cudaDeviceSynchronize());
 
     double dtime = - omp_get_wtime();
     for (int i = 0; i < 1000; i++) sumArraysOnGPU<<<grid, block>>>(d_A, d_B, d_C, nElem);
