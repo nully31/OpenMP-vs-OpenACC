@@ -1,4 +1,7 @@
 # OpenMP-vs-OpenACC
+
+[![GLWTPL](https://img.shields.io/badge/GLWT-Public_License-red.svg)](https://github.com/me-shaon/GLWTPL)
+
 GPU offloading performance comparison between OpenMP and OpenACC directives (this also includes CPU sequential and multithreaded codes, as well as CUDA kernels, for reference).
 As of now, this repository contains two simple calculations: vector addition and matrix multiplication (SGEMM).
 
